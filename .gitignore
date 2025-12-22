@@ -1,0 +1,11 @@
+# Ignore local retry files
+*.retry
+
+# Ignore hidden system files
+.DS_Store
+.idea/
+.vscode/
+
+# Ignore local SSH keys (just in case you put them here)
+*.pub
+*.pem
