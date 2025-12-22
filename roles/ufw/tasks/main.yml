@@ -1,0 +1,13 @@
+---
+- name: UFW - Allow defined ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop: "{{ allowed_ports }}"
+
+- name: UFW - Enable Firewall and deny all other incoming
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming

@@ -1,0 +1,26 @@
+---
+- name: VPS Initial Setup
+  hosts: all
+  become: yes
+
+  vars_prompt:
+    - name: ssh_key_path
+      prompt: "Enter the local path to your public SSH key (e.g., ~/.ssh/id_rsa.pub)"
+      private: no
+      default: "~/.ssh/id_rsa.pub"
+
+  vars:
+    new_user: developer
+    allowed_ports:
+      - '22'
+      - '80'
+      - '443'
+
+  roles:
+    - common
+    - docker
+    - fail2ban
+    - ufw
+    - zsh
+    - ssh_setup
+    - cleanup

@@ -1,0 +1,34 @@
+---
+- name: Update apt cache and upgrade packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Install base dependencies
+  apt:
+    name: [curl, git, ca-certificates]
+    state: present
+
+- name: UFW - Allow SSH
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
+- name: UFW - Allow HTTP
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: UFW - Allow HTTPS
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: UFW - Enable Firewall and deny all other incoming
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming

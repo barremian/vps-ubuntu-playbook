@@ -1,0 +1,23 @@
+---
+- name: Install Zsh
+  apt:
+    name: zsh
+    state: present
+
+- name: Create developer user with Zsh shell and Docker group
+  user:
+    name: "{{ new_user }}"
+    shell: /usr/bin/zsh
+    groups: sudo,docker
+    append: yes
+
+- name: Set Zsh as default for root
+  user:
+    name: root
+    shell: /usr/bin/zsh
+
+- name: Install Oh My Zsh and Plugins for root and developer
+  include_tasks: user_zsh_setup.yml
+  loop:
+    - { user: 'root', home: '/root' }
+    - { user: "{{ new_user }}", home: "/home/{{ new_user }}" }

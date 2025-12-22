@@ -1,0 +1,35 @@
+---
+- name: "Check if Oh My Zsh is installed for {{ item.user }}"
+  stat:
+    path: "{{ item.home }}/.oh-my-zsh"
+  register: omz_stat
+
+- name: "Clone Oh My Zsh for {{ item.user }}"
+  git:
+    repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+    dest: "{{ item.home }}/.oh-my-zsh"
+    depth: 1
+  when: not omz_stat.stat.exists
+  become: yes
+  become_user: "{{ item.user }}"
+
+- name: "Install custom ZSH plugins for {{ item.user }}"
+  git:
+    repo: "{{ plugin.repo }}"
+    dest: "{{ item.home }}/.oh-my-zsh/custom/plugins/{{ plugin.name }}"
+    depth: 1
+  loop:
+    - { name: "zsh-syntax-highlighting", repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git" }
+    - { name: "zsh-autosuggestions", repo: "https://github.com/zsh-users/zsh-autosuggestions" }
+  loop_control:
+    loop_var: plugin
+  become: yes
+  become_user: "{{ item.user }}"
+
+- name: "Deploy .zshrc for {{ item.user }}"
+  copy:
+    src: files/zshrc
+    dest: "{{ item.home }}/.zshrc"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: '0644'
