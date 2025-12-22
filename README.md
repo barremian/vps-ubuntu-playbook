@@ -8,18 +8,18 @@ A modular Ansible playbook designed to bootstrap a fresh Ubuntu VPS with industr
 3. **VPS Access**: Root SSH access to the target VPS.
 
 ## Deployment Instructions
-1. Install Ansible locally: `pip install ansible`.
-2. Update Inventory: Put your VPS IP in `inventory.ini`.
-3. Dry Run (check mode): Run the playbook in check mode to see what would happen without modifying the server
+1. **Install Ansible locally**: `pip install ansible`.
+2. **Update Inventory**: Put your VPS IP in `inventory.ini`.
+3. **Dry Run** (check mode): Run the playbook in check mode to see what would happen without modifying the server
    ```bash
    ansible-playbook -i inventory.ini playbook.yml --check
    ```
-4. Configuration Files: Ensure your custom `sshd_config` and `zshrc` are in the `files/` folder.
+4. **Configuration Files**: Ensure your custom `sshd_config` and `zshrc` are in the `files/` folder.
 5. **Run Playbook**:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml
    ```
-1. Path Input: When prompted, provide the path to your public key (default: ~/.ssh/id_rsa.pub).
+6. **Path Input**: When prompted, provide the path to your public key (default: ~/.ssh/id_rsa.pub).
 
 ## Post-Installation
 After the playbook completes:
