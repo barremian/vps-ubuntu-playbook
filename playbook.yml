@@ -8,13 +8,16 @@
       prompt: "Enter the local path to your public SSH key (e.g., ~/.ssh/id_rsa.pub)"
       private: no
       default: "~/.ssh/id_rsa.pub"
+    - name: new_user
+      prompt: "Enter the username for the new user to create"
+      private: no
+      default: "developer"
 
   vars:
-    new_user: developer
     allowed_ports:
-      - '22'
-      - '80'
-      - '443'
+      - "22"
+      - "80"
+      - "443"
 
   roles:
     - common
