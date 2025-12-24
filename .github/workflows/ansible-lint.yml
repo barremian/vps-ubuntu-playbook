@@ -1,17 +1,39 @@
-name: Ansible Lint
+name: ansible-lint
 on:
   push:
-    branches: ["main", "master", "develop", "feature/*", "bugfix/*", "hotfix/*"]
+    branches:
+      [
+        "main",
+        "master",
+        "develop",
+        "feature/*",
+        "bugfix/*",
+        "hotfix/*",
+        "release/*",
+      ]
   pull_request:
-    branches: ["main", "master", "develop", "feature/*", "bugfix/*", "hotfix/*"]
-
+    branches:
+      [
+        "main",
+        "master",
+        "develop",
+        "feature/*",
+        "bugfix/*",
+        "hotfix/*",
+        "release/*",
+      ]
 jobs:
-  lint:
+  ansible-lint:
     name: Ansible Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Run ansible-lint
-        uses: ansible/ansible-lint-action@v6
+        uses: ansible/ansible-lint@v25.12.2
+        with:
+          args: ""
+          gh_action_ref: "v25.12.2"
+          setup_python: "true"
+          python_version: "3.14"
+          working_directory: ""
+          requirements_file: ""
