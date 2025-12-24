@@ -10,6 +10,7 @@
     src: /etc/fail2ban/jail.conf
     dest: /etc/fail2ban/jail.local
     remote_src: true
+    mode: "0644"
 
 - name: Ensure Fail2Ban is started and enabled
   ansible.builtin.service:
