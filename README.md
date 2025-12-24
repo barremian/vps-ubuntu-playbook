@@ -1,5 +1,7 @@
 # Ubuntu VPS Setup Ansible Playbook
 
+[![ansible-lint](https://github.com/barremian/vps-ubuntu-playbook/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/barremian/vps-ubuntu-playbook/actions/workflows/ansible-lint.yml)
+
 A modular Ansible playbook designed to bootstrap a fresh Ubuntu VPS with industry-standard security and developer tools.
 
 ## Prerequisites
