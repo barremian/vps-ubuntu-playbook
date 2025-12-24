@@ -36,4 +36,4 @@ jobs:
           setup_python: "true"
           python_version: "3.14"
           working_directory: ""
-          requirements_file: ""
+          requirements_file: "requirements.yml"
