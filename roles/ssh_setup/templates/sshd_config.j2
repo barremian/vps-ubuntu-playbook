@@ -1,0 +1,18 @@
+# This is the sshd server system-wide configuration file.
+# Managed by Ansible
+
+Include /etc/ssh/sshd_config.d/*.conf
+
+Port 22
+Protocol 2
+
+PermitRootLogin {{ ssh_permit_root_login }}
+PasswordAuthentication {{ ssh_password_authentication }}
+KbdInteractiveAuthentication no
+UsePAM yes
+
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+
+Subsystem sftp /usr/lib/openssh/sftp-server

@@ -13,12 +13,6 @@
       private: no
       default: "developer"
 
-  vars:
-    allowed_ports:
-      - "22"
-      - "80"
-      - "443"
-
   roles:
     - common
     - docker

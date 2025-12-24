@@ -1,0 +1,6 @@
+---
+# Defaults for common role
+common_packages:
+  - curl
+  - git
+  - ca-certificates

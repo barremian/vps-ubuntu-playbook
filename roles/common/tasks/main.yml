@@ -6,5 +6,5 @@
 
 - name: Install base dependencies
   apt:
-    name: [curl, git, ca-certificates]
+    name: "{{ common_packages }}"
     state: present

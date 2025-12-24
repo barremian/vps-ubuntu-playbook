@@ -1,0 +1,8 @@
+---
+# Global configuration variables for all hosts
+ssh_permit_root_login: "no"
+ssh_password_authentication: "no"
+allowed_ports:
+  - "22"
+  - "80"
+  - "443"
