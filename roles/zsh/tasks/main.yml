@@ -4,20 +4,46 @@
     name: zsh
     state: present
 
-- name: Create developer user with Zsh shell and Docker group
+- name: Check for /usr/bin/zsh
+  stat:
+    path: /usr/bin/zsh
+  register: zsh_usr
+
+- name: Check for /bin/zsh
+  stat:
+    path: /bin/zsh
+  register: zsh_bin
+
+- name: Set zsh_path fact
+  set_fact:
+    zsh_path: >-
+      {{ '/usr/bin/zsh' if zsh_usr.stat.exists else
+         ('/bin/zsh' if zsh_bin.stat.exists else '') }}
+
+- name: Fail if no zsh binary found
+  fail:
+    msg: "zsh binary not found after install"
+  when: zsh_path == ''
+
+- name: Ensure Zsh path is present in /etc/shells
+  lineinfile:
+    path: /etc/shells
+    line: "{{ zsh_path }}"
+    state: present
+
+- name: Set Zsh as default for new user
   user:
     name: "{{ new_user }}"
-    shell: /usr/bin/zsh
-    groups: sudo,docker
-    append: yes
+    shell: "{{ zsh_path }}"
+  when: new_user is defined
 
 - name: Set Zsh as default for root
   user:
     name: root
-    shell: /usr/bin/zsh
+    shell: "{{ zsh_path }}"
 
-- name: Install Oh My Zsh and Plugins for root and developer
+- name: Install Oh My Zsh and Plugins for root and new user
   include_tasks: user_zsh_setup.yml
   loop:
-    - { user: 'root', home: '/root' }
+    - { user: "root", home: "/root" }
     - { user: "{{ new_user }}", home: "/home/{{ new_user }}" }

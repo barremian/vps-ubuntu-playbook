@@ -24,6 +24,7 @@
     - docker
     - fail2ban
     - ufw
+    - user_management
     - zsh
     - ssh_setup
     - cleanup

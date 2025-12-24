@@ -8,6 +8,19 @@ A modular Ansible playbook designed to bootstrap a fresh Ubuntu VPS with industr
 2. **SSH Key**: An existing SSH key to login to the VPS.
 3. **VPS Access**: Root SSH access to the target VPS.
 
+## Playbook Execution Flow
+
+When you run this playbook, it performs the following steps in order:
+
+1. **common**: Updates the apt cache, upgrades all packages, and installs essential dependencies.
+2. **docker**: Removes any old Docker versions, adds Docker’s official GPG key and repository, and installs the latest Docker Engine and related tools.
+3. **fail2ban**: Installs Fail2Ban, sets up its default configuration, and ensures the service is enabled and running.
+4. **ufw**: Configures the Uncomplicated Firewall (UFW) to allow only specified ports (22, 80, 443) and enables the firewall with a default deny policy for incoming connections.
+5. **user_management**: Creates the new user, and adds them to the sudo and docker groups.
+6. **zsh**: Installs Zsh, sets it as the default shell for root and the new user, and installs Oh My Zsh with useful plugins and a custom `.zshrc`.
+7. **ssh_setup**: Adds your local public SSH key for the new user, deploys a hardened SSH configuration, and restarts the SSH service to apply changes. **Note:** This disables root login.
+8. **cleanup**: Removes unused packages and clears the apt cache to keep the system lean.
+
 ## Deployment Instructions
 
 1. **Install Ansible locally**: `pip install ansible`.
@@ -33,4 +46,4 @@ After the playbook completes:
 
 ## Security Note
 
-This playbook disables root login. Do not close your current root session until you have verified you can log in as developer via SSH.
+This playbook disables root login. Do not close your current root session until you have verified you can log in as the new user via SSH.
