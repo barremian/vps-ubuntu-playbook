@@ -1,16 +1,16 @@
 ---
 - name: VPS Initial Setup
   hosts: all
-  become: yes
+  become: true
 
   vars_prompt:
     - name: ssh_key_path
       prompt: "Enter the local path to your public SSH key (e.g., ~/.ssh/id_rsa.pub)"
-      private: no
+      private: false
       default: "~/.ssh/id_rsa.pub"
     - name: new_user
       prompt: "Enter the username for the new user to create"
-      private: no
+      private: false
       default: "developer"
 
   roles:

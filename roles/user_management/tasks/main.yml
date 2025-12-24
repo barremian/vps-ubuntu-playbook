@@ -4,4 +4,4 @@
     name: "{{ new_user }}"
     shell: /bin/bash
     groups: sudo,docker
-    append: yes
+    append: true

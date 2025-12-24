@@ -3,16 +3,16 @@
   apt:
     name: fail2ban
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Initial Fail2Ban setup
   copy:
     src: /etc/fail2ban/jail.conf
     dest: /etc/fail2ban/jail.local
-    remote_src: yes
+    remote_src: true
 
 - name: Ensure Fail2Ban is started and enabled
   service:
     name: fail2ban
     state: started
-    enabled: yes
+    enabled: true

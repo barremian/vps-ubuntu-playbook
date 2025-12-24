@@ -1,8 +1,8 @@
 ---
 - name: Cleanup - Remove unused dependency packages
   apt:
-    autoremove: yes
+    autoremove: true
 
 - name: Cleanup - Clear apt cache
   apt:
-    autoclean: yes
+    autoclean: true

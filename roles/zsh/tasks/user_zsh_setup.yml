@@ -6,11 +6,11 @@
 
 - name: "Clone Oh My Zsh for {{ item.user }}"
   git:
-    repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: "{{ item.home }}/.oh-my-zsh"
     depth: 1
   when: not omz_stat.stat.exists
-  become: yes
+  become: true
   become_user: "{{ item.user }}"
 
 - name: "Install custom ZSH plugins for {{ item.user }}"
@@ -23,7 +23,7 @@
     - { name: "zsh-autosuggestions", repo: "https://github.com/zsh-users/zsh-autosuggestions" }
   loop_control:
     loop_var: plugin
-  become: yes
+  become: true
   become_user: "{{ item.user }}"
 
 - name: "Deploy .zshrc for {{ item.user }}"
@@ -32,4 +32,4 @@
     dest: "{{ item.home }}/.zshrc"
     owner: "{{ item.user }}"
     group: "{{ item.user }}"
-    mode: '0644'
+    mode: "0644"
