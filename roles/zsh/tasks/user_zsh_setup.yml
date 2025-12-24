@@ -2,14 +2,15 @@
 - name: "Check if Oh My Zsh is installed for {{ item.user }}"
   ansible.builtin.stat:
     path: "{{ item.home }}/.oh-my-zsh"
-  register: omz_stat
+  register: zsh_omz_stat
 
 - name: "Clone Oh My Zsh for {{ item.user }}"
   ansible.builtin.git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: "{{ item.home }}/.oh-my-zsh"
+    version: master
     depth: 1
-  when: not omz_stat.stat.exists
+  when: not zsh_omz_stat.stat.exists
   become: true
   become_user: "{{ item.user }}"
 
@@ -17,6 +18,7 @@
   ansible.builtin.git:
     repo: "{{ plugin.repo }}"
     dest: "{{ item.home }}/.oh-my-zsh/custom/plugins/{{ plugin.name }}"
+    version: master
     depth: 1
   loop:
     - { name: "zsh-syntax-highlighting", repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git" }
