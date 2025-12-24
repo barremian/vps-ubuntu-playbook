@@ -23,6 +23,26 @@ When you run this playbook, it performs the following steps in order:
 7. **ssh_setup**: Adds your local public SSH key for the new user, deploys a hardened SSH configuration, and restarts the SSH service to apply changes. **Note:** This disables root login.
 8. **cleanup**: Removes unused packages and clears the apt cache to keep the system lean.
 
+## Connection Methods
+
+Depending on your VPS provider, you might need to connect using either an SSH key or a password for the first time.
+
+### Using SSH Key
+If you supplied an SSH key during VPS creation:
+- **Default Key**: If your key is in the default location (`~/.ssh/id_rsa`), Ansible will use it automatically.
+- **Specific Key**: If you use a different key, run with `--private-key`:
+  ```bash
+  ansible-playbook -i inventory.ini playbook.yml --private-key=~/.ssh/your_key
+  ```
+
+### Using Password
+If your provider only provides a root password:
+1. Ensure `sshpass` is installed.
+2. Run the playbook with `-k` (ask for SSH password) and `-K` (ask for become password - which is the same as the root password for the first run):
+  ```bash
+  ansible-playbook -i inventory.ini playbook.yml -k -K
+  ```
+
 ## Deployment Options
 
 ### Running Natively
@@ -33,15 +53,17 @@ When you run this playbook, it performs the following steps in order:
    ansible-galaxy collection install -r requirements.yml
    ```
 3. **Update Inventory**: Put your VPS IP in `inventory.ini`.
-4. **Dry Run** (check mode): Run the playbook in check mode to see what would happen without modifying the server
+4. **Dry Run**:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml --check
    ```
+   *Note: Add connection flags (like `-k -K`) if necessary.*
 5. **Configuration Files**: Ensure your custom `sshd_config` is in `roles/ssh_setup/files/` and `zshrc` is in `roles/zsh/files/`.
 6. **Run Playbook**:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml
    ```
+   *Note: Add connection flags (like `-k -K`) if necessary.*
 7. **User and Path Input**: When prompted, provide the username for the new user (default: developer) and the path to your public key (default: ~/.ssh/id_rsa.pub).
 
 ### Running using Docker
