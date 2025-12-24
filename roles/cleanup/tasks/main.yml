@@ -1,8 +1,8 @@
 ---
 - name: Cleanup - Remove unused dependency packages
-  apt:
+  ansible.builtin.apt:
     autoremove: true
 
 - name: Cleanup - Clear apt cache
-  apt:
+  ansible.builtin.apt:
     autoclean: true

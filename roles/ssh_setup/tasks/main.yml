@@ -1,15 +1,15 @@
 ---
 - name: Authorize local SSH key for developer
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ new_user }}"
     state: present
     key: "{{ lookup('file', ssh_key_path) }}"
 
 - name: Deploy hardened sshd_config
-  template:
+  ansible.builtin.template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   notify: Restart SSH

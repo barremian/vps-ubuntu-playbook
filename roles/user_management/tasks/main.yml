@@ -1,6 +1,6 @@
 ---
 - name: Set up new user and add to Sudo and Docker groups
-  user:
+  ansible.builtin.user:
     name: "{{ new_user }}"
     shell: /bin/bash
     groups: sudo,docker
