@@ -23,7 +23,9 @@ When you run this playbook, it performs the following steps in order:
 7. **ssh_setup**: Adds your local public SSH key for the new user, deploys a hardened SSH configuration, and restarts the SSH service to apply changes. **Note:** This disables root login.
 8. **cleanup**: Removes unused packages and clears the apt cache to keep the system lean.
 
-## Deployment Instructions
+## Deployment Options
+
+### Running Natively
 
 1. **Install Ansible locally**: `pip install ansible`.
 2. **Install Dependencies**: Download the necessary collections:
@@ -41,6 +43,25 @@ When you run this playbook, it performs the following steps in order:
    ansible-playbook -i inventory.ini playbook.yml
    ```
 7. **User and Path Input**: When prompted, provide the username for the new user (default: developer) and the path to your public key (default: ~/.ssh/id_rsa.pub).
+
+### Running using Docker
+
+Using Docker enables deployment without needing to install Ansible or its dependencies directly on your host machine.
+
+1. **Install Docker**: Ensure Docker is installed and running on your local machine.
+2. **Update Inventory**: Put your VPS IP in `inventory.ini`.
+3. **Configuration Files**: Ensure your custom `sshd_config` and `zshrc` are in their respective roles' `files/` directories.
+4. **Run using Docker**:
+   Run the following command from the root of the project:
+   ```bash
+   docker run --rm -it \
+     -v $(pwd):/ansible \
+     -v ~/.ssh:/root/.ssh:ro \
+     -w /ansible \
+     willhallonline/ansible:latest \
+     /bin/sh -c "ansible-galaxy collection install -r requirements.yml && ansible-playbook -i inventory.ini playbook.yml"
+   ```
+5. **User and Path Input**: Provide the required inputs when prompted. Note that the default path for the public key inside the container is `/root/.ssh/id_rsa.pub` if you mounted your `~/.ssh` directory.
 
 ## Post-Installation
 
