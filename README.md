@@ -26,17 +26,21 @@ When you run this playbook, it performs the following steps in order:
 ## Deployment Instructions
 
 1. **Install Ansible locally**: `pip install ansible`.
-2. **Update Inventory**: Put your VPS IP in `inventory.ini`.
-3. **Dry Run** (check mode): Run the playbook in check mode to see what would happen without modifying the server
+2. **Install Dependencies**: Download the necessary collections:
+   ```bash
+   ansible-galaxy collection install -r requirements.yml
+   ```
+3. **Update Inventory**: Put your VPS IP in `inventory.ini`.
+4. **Dry Run** (check mode): Run the playbook in check mode to see what would happen without modifying the server
    ```bash
    ansible-playbook -i inventory.ini playbook.yml --check
    ```
-4. **Configuration Files**: Ensure your custom `sshd_config` is in `roles/ssh_setup/files/` and `zshrc` is in `roles/zsh/files/`.
-5. **Run Playbook**:
+5. **Configuration Files**: Ensure your custom `sshd_config` is in `roles/ssh_setup/files/` and `zshrc` is in `roles/zsh/files/`.
+6. **Run Playbook**:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml
    ```
-6. **User and Path Input**: When prompted, provide the username for the new user (default: developer) and the path to your public key (default: ~/.ssh/id_rsa.pub).
+7. **User and Path Input**: When prompted, provide the username for the new user (default: developer) and the path to your public key (default: ~/.ssh/id_rsa.pub).
 
 ## Post-Installation
 
