@@ -7,7 +7,7 @@
 
 - name: Deploy hardened sshd_config
   copy:
-    src: files/sshd_config
+    src: sshd_config
     dest: /etc/ssh/sshd_config
     owner: root
     group: root

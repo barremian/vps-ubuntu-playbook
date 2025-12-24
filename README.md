@@ -29,7 +29,7 @@ When you run this playbook, it performs the following steps in order:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml --check
    ```
-4. **Configuration Files**: Ensure your custom `sshd_config` and `zshrc` are in the `files/` folder.
+4. **Configuration Files**: Ensure your custom `sshd_config` is in `roles/ssh_setup/files/` and `zshrc` is in `roles/zsh/files/`.
 5. **Run Playbook**:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml

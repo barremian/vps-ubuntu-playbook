@@ -28,7 +28,7 @@
 
 - name: "Deploy .zshrc for {{ item.user }}"
   copy:
-    src: files/zshrc
+    src: zshrc
     dest: "{{ item.home }}/.zshrc"
     owner: "{{ item.user }}"
     group: "{{ item.user }}"
