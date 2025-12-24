@@ -32,7 +32,6 @@ jobs:
         uses: ansible/ansible-lint@v25.12.2
         with:
           args: ""
-          gh_action_ref: "v25.12.2"
           setup_python: "true"
           python_version: "3.14"
           working_directory: ""
