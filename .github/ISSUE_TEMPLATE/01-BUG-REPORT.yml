@@ -1,0 +1,71 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+type: bug
+body:
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please describe the issue in detail.
+      placeholder: Please describe the issue in detail.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Please describe the steps to reproduce the issue.
+      placeholder: Please describe the steps to reproduce the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: Please describe the expected result.
+      placeholder: Please describe the expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Result
+      description: Please describe the actual result.
+      placeholder: Please describe the actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs/Screenshots/Videos
+      description: Attach any relevant logs, screenshots, or videos.
+      placeholder: Please attach any relevant logs, screenshots, or videos.
+      value: "None"
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please describe the environment in which the issue occurred.
+      placeholder: OS, Version, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Please describe any additional context.
+      placeholder: Please describe any additional context.
+    validations:
+      required: false
