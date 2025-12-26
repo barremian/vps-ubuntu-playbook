@@ -4,6 +4,21 @@
     path: "{{ item.home }}/.oh-my-zsh"
   register: zsh_omz_stat
 
+- name: "whoami base"
+  shell: >
+    whoami
+
+- name: "whoami root"
+  shell: >
+    whoami
+  become: true
+
+- name: "whoami {{ item.user }}"
+  shell: >
+    whoami
+  become: true
+  become_user: "{{ item.user }}"
+
 - name: "Clone Oh My Zsh for {{ item.user }}"
   ansible.builtin.git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
