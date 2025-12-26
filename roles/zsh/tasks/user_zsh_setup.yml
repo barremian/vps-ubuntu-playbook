@@ -5,16 +5,16 @@
   register: zsh_omz_stat
 
 - name: "whoami base"
-  shell: >
+  ansible.builtin.shell: >
     whoami
 
 - name: "whoami root"
-  shell: >
+  ansible.builtin.shell: >
     whoami
   become: true
 
 - name: "whoami {{ item.user }}"
-  shell: >
+  ansible.builtin.shell: >
     whoami
   become: true
   become_user: "{{ item.user }}"
